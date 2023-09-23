@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const boardLinkLabel = document.getElementById("boardLinkLabel");
     const projectNameLabel = document.getElementById("projectNameLabel");
     const ticketNumberLabel = document.getElementById("ticketNumberLabel");
+    const projectListContainer = this.getElementById("projectListContainer");
 
     function displayErrorMessage(inputElement, message) {
         inputElement.classList.add("error");
@@ -42,9 +43,11 @@ document.addEventListener("DOMContentLoaded", function () {
             addAnotherProjectButton.classList.remove("hidden");
             projectNameLabel.classList.remove("hidden");
             ticketNumberLabel.classList.remove("hidden");
+            projectListContainer.classList.remove("hidden");
         } else {
             projectNameLabel.classList.add("hidden");
             ticketNumberLabel.classList.add("hidden");
+            projectListContainer.classList.add("hidden");
         }
     });
 
@@ -81,11 +84,13 @@ document.addEventListener("DOMContentLoaded", function () {
         
         boardLinkInput.classList.add("hidden");
         saveBoardLinkButton.classList.add("hidden");
+        goBackButton.classList.add("hidden");
         projectNameDisplay.classList.remove("hidden");
         ticketNumberInput.classList.remove("hidden");
         openTicketButton.classList.remove("hidden");
         clearSavedProjectButton.classList.remove("hidden");
         addAnotherProjectButton.classList.remove("hidden");
+        projectListContainer.classList.remove("hidden");
         projectNameDisplay.value = projectName;
        
         chrome.storage.local.set({ lastProjectName: projectName });
@@ -117,6 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
         clearSavedProjectButton.classList.add("hidden");
         projectNameLabel.classList.add("hidden");
         ticketNumberLabel.classList.add("hidden");
+        
     });
 
     goBackButton.addEventListener("click", function() {
@@ -143,6 +149,9 @@ document.addEventListener("DOMContentLoaded", function () {
             openTicketButton.classList.add("hidden");
             clearSavedProjectButton.classList.add("hidden");
             addAnotherProjectButton.classList.add("hidden");
+            projectNameLabel.classList.add("hidden");
+            ticketNumberLabel.classList.add("hidden");
+            projectListContainer.classList.add("hidden");
         });
     });
 

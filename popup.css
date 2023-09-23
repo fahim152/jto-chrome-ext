@@ -8,11 +8,11 @@ body {
 #popupContainer {
   width: 350px;
   max-width: 250px;
-  margin: 20px auto;
-  padding: 25px;
+  margin: 10px;
+  padding: 20px;
   background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 6px 10px rgba(7, 239, 81, 0.2);
 }
 
 h1, h2 {
