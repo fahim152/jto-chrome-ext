@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jira Ticket Opener</title>
+  <link rel="stylesheet" type="text/css" href="popup.css">
+</head>
+<body>
+  <div id="popupContainer">
+    <h1>Jira Ticket Opener</h1>
+    <div id="boardLinkContainer">
+      <label id="boardLinkLabel" for="boardLink">Board Link:</label>
+      <input type="text" id="boardLink" placeholder="Enter board link">
+      <button id="saveBoardLink">Save</button>
+      <button id="goBack" class="hidden">Back</button>
+    </div>
+    <div id="projectListContainer">
+      <h2>Saved Projects:</h2>
+      <select id="projectList"></select>
+      <button id="clearSavedProject" class="hidden">Clear Saved Project</button>
+      <button id="addAnotherProject" class="hidden">Add Another Project</button>
+    </div>
+    <div id="ticketContainer">
+      <label id="projectNameLabel" for="projectNameDisplay">Project Name:</label>
+      <input type="text" id="projectNameDisplay" class="hidden" readonly>
+      <label id="ticketNumberLabel" for="ticketNumber">Ticket Number:</label>
+      <input type="text" id="ticketNumber" class="hidden" placeholder="Enter ticket number">
+      <button id="openTicket" class="hidden">Open Ticket</button>
+      <button id="saveAnotherProject" class="hidden">Save Another Project</button>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
