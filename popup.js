@@ -74,11 +74,11 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!projectNames.includes(projectName)) {
                 savedProjects.push(project);
                 chrome.storage.local.set({ projectList: savedProjects }, function() {
-                    projectList.innerHTML = savedProjects.map(project => `<option value="${project.domain}|${project.name}">${project.name}</option>`).join("");
+                    projectList.innerHTML = savedProjects.map(project => `<option value="${project.domain}|${project.name}" selected>${project.name}</option>`).join("");
                 });
             }
         });
-
+        
         boardLinkInput.classList.add("hidden");
         saveBoardLinkButton.classList.add("hidden");
         projectNameDisplay.classList.remove("hidden");
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
         clearSavedProjectButton.classList.remove("hidden");
         addAnotherProjectButton.classList.remove("hidden");
         projectNameDisplay.value = projectName;
-
+       
         chrome.storage.local.set({ lastProjectName: projectName });
     });
 
