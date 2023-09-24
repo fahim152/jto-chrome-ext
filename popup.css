@@ -57,6 +57,13 @@ button {
   background: rgb(201, 41, 41);
 }
 
+#goBack {
+  background: rgb(58, 93, 248);
+}
+
+#openTicket {
+  background: rgb(58, 93, 248);
+}
 
 button:hover {
   background-color: #45a049;
