@@ -88,6 +88,8 @@ document.addEventListener("DOMContentLoaded", function () {
         projectNameDisplay.classList.remove("hidden");
         ticketNumberInput.classList.remove("hidden");
         openTicketButton.classList.remove("hidden");
+        projectNameLabel.classList.remove("hidden");
+        ticketNumberLabel.classList.remove("hidden");
         clearSavedProjectButton.classList.remove("hidden");
         addAnotherProjectButton.classList.remove("hidden");
         projectListContainer.classList.remove("hidden");
