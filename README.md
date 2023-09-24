@@ -1,6 +1,6 @@
 # Jira Ticket Opener
 
-![Optional: Logo or Screenshot](URL_to_your_image.png)
+<img align="left" alt="Twitter" width="128px" src="./images/icon128.png" />
 
 ## Description
 
