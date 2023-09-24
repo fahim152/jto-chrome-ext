@@ -3,7 +3,7 @@
     "name": "Jira Ticket Opener",
     "version": "0.0.1",
     "description": "Open Jira tickets quickly.",
-    "permissions": ["activeTab", "storage"],
+    "permissions": ["storage"],
     "action": {
       "default_popup": "popup.html",
       "default_icon": {
