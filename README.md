@@ -4,7 +4,7 @@
 
 ## Description
 
-The Jira Ticket Opener is a Chrome extension designed to streamline the workflow of developers and project managers using Jira. With this extension, users can quickly access any Jira ticket using its number without navigating through various boards and projects.
+The Jira Ticket Turbo(JTT) is a Chrome extension designed to streamline the workflow of developers and project managers using Jira. With this extension, users can quickly access any Jira ticket using its number without navigating through various boards and projects.
 
 ## Features
 
@@ -27,6 +27,7 @@ The Jira Ticket Opener is a Chrome extension designed to streamline the workflow
 2. Initially, you'll be prompted to enter your Jira board link.
 3. After saving, provide the Jira ticket number and the extension will open the ticket in a new tab.
 4. Use the dropdown to switch between saved Jira board links as needed.
+5. Access most recent opened tickets from the list. Clear the list if necessary
 
 ## Contributing
 
