@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Jira Ticket Opener</title>
+  <title>Jira Ticket Turbo</title>
   <link rel="stylesheet" type="text/css" href="popup.css">
 </head>
 <body>
   <div id="popupContainer">
-    <h1>Jira Ticket Opener</h1>
+    <h1>Jira Ticket Turbo </h1>
     <div id="boardLinkContainer">
       <label id="boardLinkLabel" for="boardLink">Board Link:</label>
       <input type="text" id="boardLink" placeholder="Enter board link">
@@ -17,7 +17,7 @@
       <h2>Saved Projects:</h2>
       <select id="projectList"></select>
       <button id="addAnotherProject" class="hidden">Add New</button>
-      <button id="clearSavedProject" class="hidden">Clear All Projects </button>
+      <button id="clearSavedProject" class="hidden">Clear All </button>
     </div>
     <div id="ticketContainer">
       <label id="projectNameLabel" for="projectNameDisplay">Project Name:</label>
@@ -25,7 +25,13 @@
       <label id="ticketNumberLabel" for="ticketNumber">Ticket Number:</label>
       <input type="text" id="ticketNumber" class="hidden" placeholder="Enter ticket number">
       <button id="openTicket" class="hidden">Open Ticket</button>
-      <button id="saveAnotherProject" class="hidden">Save Another Project</button>
+    </div>
+    <div id="mostRecentContainer">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h3>Most Recent Tickets</h3>
+          <button id="clearRecentTickets" alt="Clear Recent Tickets">&#10007; clear</button> 
+      </div>
+      <div id="recentTicketsList"></div>
     </div>
   </div>
   <script src="popup.js"></script>

@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const saveBoardLinkButton = document.getElementById("saveBoardLink");
     const ticketNumberInput = document.getElementById("ticketNumber");
     const openTicketButton = document.getElementById("openTicket");
-    const saveAnotherProjectButton = document.getElementById("saveAnotherProject");
     const clearSavedProjectButton = document.getElementById("clearSavedProject");
     const addAnotherProjectButton = document.getElementById("addAnotherProject");
     const goBackButton = document.getElementById("goBack");
@@ -13,11 +12,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const projectNameLabel = document.getElementById("projectNameLabel");
     const ticketNumberLabel = document.getElementById("ticketNumberLabel");
     const projectListContainer = this.getElementById("projectListContainer");
-
-    function displayErrorMessage(inputElement, message) {
-        inputElement.classList.add("error");
-        alert(message);
-    }
+    const recentTicketsList = document.getElementById("recentTicketsList");
+    const clearRecentTicketsButton = document.getElementById("clearRecentTickets");
+    const mostRecentContainer = document.getElementById("mostRecentContainer");
+    
+    displayRecentTickets();
 
     chrome.storage.local.get(["projectList", "lastProjectName"], function (result) {
         const savedProjects = result.projectList || [];
@@ -62,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const boardLink = boardLinkInput.value;
         const regex = /^https:\/\/.+\/jira\/software\/projects\/.+\/boards\/\d+$/;
         if (!regex.test(boardLink)) {
-            displayErrorMessage(boardLinkInput, "Invalid board link. Please check and try again.");
+            displayErrorMessage(boardLinkInput, "Invalid board link. Please select board and copy link from the address bar");
             return;
         }
 
@@ -82,6 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
         
+        boardLinkLabel.classList.add("hidden");
         boardLinkInput.classList.add("hidden");
         saveBoardLinkButton.classList.add("hidden");
         goBackButton.classList.add("hidden");
@@ -98,19 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
         chrome.storage.local.set({ lastProjectName: projectName });
     });
 
-    saveAnotherProjectButton.addEventListener("click", function () {
-        boardLinkInput.value = "";
-        boardLinkInput.classList.remove("hidden");
-        saveBoardLinkButton.classList.remove("hidden");
-        goBackButton.classList.remove("hidden");
-        projectNameDisplay.classList.add("hidden");
-        ticketNumberInput.classList.add("hidden");
-        openTicketButton.classList.add("hidden");
-        saveAnotherProjectButton.classList.add("hidden");
-        addAnotherProjectButton.classList.add("hidden");
-        clearSavedProjectButton.classList.add("hidden");
-    });
-
     addAnotherProjectButton.addEventListener("click", function() {
         boardLinkInput.value = "";
         boardLinkInput.classList.remove("hidden");
@@ -119,7 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
         projectNameDisplay.classList.add("hidden");
         ticketNumberInput.classList.add("hidden");
         openTicketButton.classList.add("hidden");
-        saveAnotherProjectButton.classList.add("hidden");
         addAnotherProjectButton.classList.add("hidden");
         clearSavedProjectButton.classList.add("hidden");
         projectNameLabel.classList.add("hidden");
@@ -141,6 +127,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     clearSavedProjectButton.addEventListener("click", function () {
+        let userResponse = confirm("This action will remove all saved project(s)");
+
+        if (!userResponse) {
+            return;
+        } 
         chrome.storage.local.set({ projectList: [] }, function() {
             projectList.innerHTML = "";
             projectNameDisplay.value = "";
@@ -163,12 +154,60 @@ document.addEventListener("DOMContentLoaded", function () {
             displayErrorMessage(ticketNumberInput, "Invalid ticket number. Please enter a valid number.");
             return;
         }
-
         const selectedValue = projectList.value.split("|");
         const projectDomain = selectedValue[0];
         const projectName = projectNameDisplay.value;
-
         const jiraUrl = `https://${projectDomain}/browse/${projectName}-${ticketNumber}`;
+        addRecentTicket(jiraUrl, projectName, ticketNumber);
+
         chrome.tabs.create({ url: jiraUrl });
     });
+
+    clearRecentTicketsButton.addEventListener("click", function() {
+        chrome.storage.local.set({ recentTickets: [] }, function() {
+            displayRecentTickets();
+        });
+    });
+
+    function addRecentTicket(jiraUrl, projectName, ticketNumber) {
+        chrome.storage.local.get(["recentTickets"], function(result) {
+            const recentTickets = result.recentTickets || [];
+            const isDuplicate = recentTickets.some(ticket => ticket.label === `${projectName}-${ticketNumber}`);
+    
+            if (!isDuplicate) {
+                recentTickets.unshift({ url: jiraUrl, label: `${projectName}-${ticketNumber}` });
+                if (recentTickets.length > 6) recentTickets.pop();
+                chrome.storage.local.set({ recentTickets }, function() {
+                    displayRecentTickets();
+                });
+            }
+        });
+    }
+
+    function displayRecentTickets() {
+        chrome.storage.local.get(["recentTickets"], function(result) {
+            const recentTickets = result.recentTickets || [];
+            if (recentTickets.length === 0) {
+                mostRecentContainer.classList.add("hidden");
+            } else {
+                mostRecentContainer.classList.remove("hidden");
+            }
+            recentTicketsList.innerHTML = '';
+            for (let ticket of recentTickets) {
+                const ticketLink = document.createElement("a");
+                ticketLink.href = ticket.url;
+                ticketLink.target = '_blank';
+                ticketLink.textContent = ticket.label;
+                ticketLink.className = "ticket-button"; 
+                recentTicketsList.appendChild(ticketLink);
+                const separator = document.createElement("br");
+                recentTicketsList.appendChild(separator);
+            }
+        });
+    }
+
+    function displayErrorMessage(inputElement, message) {
+        inputElement.classList.add("error");
+        alert(message);
+    }
 });
