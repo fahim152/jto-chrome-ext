@@ -6,6 +6,8 @@
 
 The Jira Ticket Turbo(JTT) is a Chrome extension designed to streamline the workflow of developers and project managers using Jira. With this extension, users can quickly access any Jira ticket using its number without navigating through various boards and projects.
 
+Chrome Link: <a href="https://chromewebstore.google.com/detail/jira-ticket-turbo-jtt/pdfedhjjjifnjgogjpfmabpnigmbehal" target="_blank"> Jira Ticket Turbo(JTT)</a>
+
 ## Features
 
 - **Multiple Project Storage:** Save links to multiple Jira boards and switch between them with ease.
